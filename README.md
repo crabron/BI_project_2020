@@ -35,6 +35,32 @@ For ssu extraction, we use ssu_finder:
 
 where ``out`` - out folder, ```metabat2_bins_3``` - folder with bins, ```-t``` - number of used threads, ```-x``` format of fasta file, ```consensus.fasta``` - assemblies.
 
+A preliminary attempt was made to binning using coverage information, which was unsuccessful. For alignment per assembly, we used two alignment algorithms:
+
+```bwa mem  -t 84 consensus.fasta all.fq | samtools sort -o all.bam
+maCMD -p 'Nanopore' -x mc_out/consensus.json -i ../all.fq -t 64 -o mc_out/consensus.sam
+```
+To generate a file with sequencing depth, the following command was used:
+
+```jgi_summarize_bam_contig_depths --outputDepth true_depth.txt --referenceFasta consensus.fasta  all.bam
+```
+with result:
+
+```MetaBAT 2 (2.15 (Bioconda)) using minContig 2500, minCV 1.0, minCVSum 1.0, maxP 95%, minS 60, maxEdges 200 and minClsSize 200000. with random seed=1603977749
+0 bins  formed.
+```
+
+## Search for glycosyl hydrolases with hmmer
+
+
+```for filename in *.faa; do
+    hmmscan --noali --notextw --acc -E 0.000000000000000001 --cpu 50 -o  hm_${filename}.txt hmm/glyco.hmm $filename
+done
+```
+
+``` cat ../c1_ann.tsv | cut -f2 |grep -f /dev/stdin pr_01.gff | awk '{print $1}' | grep -f /dev/stdin ka_01.tsv | cut -f3 | taxonkit --data-dir ~/storage/temp/  -j 50 lineage | taxonkit --data-dir ~/storage/temp/ -j 50 reformat > kid_01.txt
+```
+
 
 
 

@@ -97,10 +97,10 @@ Where - c1_ann.tsv - output from hmmer, pr_01.gff - Prokka output, ka_01.tsv - K
 
 ## Results
 
-As a result of binning, 10 genomes were obtained from the metagenome.
-Metagenomes found matches with catalase families responsible for cellulose/hemicellulose decomposition.
-The collected metagenomes and the most represented groups in which the necessary catalases were found do not coincide.
-Differences in taxonomy are more pronounced than differences in the representation of glycoside hydrolase families.
+- As a result of binning, 10 genomes were obtained from the metagenome.
+- In the metagenomes found matches with catalase families responsible for cellulose/hemicellulose decomposition.
+- The collected metagenomes and the most represented groups in which the necessary catalases were found do not coincide.
+- Differences in taxonomy are more pronounced than differences in the representation of glycoside hydrolase families.
 
 
 

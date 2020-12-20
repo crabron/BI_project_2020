@@ -52,14 +52,27 @@ with result:
 
 ## Search for glycosyl hydrolases with hmmer
 
+To search for domain families of hydroside hydrolases by hmm profile, the following code was used, which launched a search for each .faa file in the directory:
 
 ```for filename in *.faa; do
     hmmscan --noali --notextw --acc -E 0.000000000000000001 --cpu 50 -o  hm_${filename}.txt hmm/glyco.hmm $filename
 done
 ```
+glyco.hmm - hmm profile, acc - accuracity trashold, filename - prokka output
+
+Post-processing of the obtained results was carried out in jupyter notebook (parse_hmm). Adding Kaiju results to hhmer results was done using the ultimate pipe for each community:
 
 ``` cat ../c1_ann.tsv | cut -f2 |grep -f /dev/stdin pr_01.gff | awk '{print $1}' | grep -f /dev/stdin ka_01.tsv | cut -f3 | taxonkit --data-dir ~/storage/temp/  -j 50 lineage | taxonkit --data-dir ~/storage/temp/ -j 50 reformat > kid_01.txt
 ```
+
+Where - c1_ann.tsv - output from hmmer, pr_01.gff - Prokka output, ka_01.tsv - Kaiju output, taxonkit - add NCBI taxonomy. Visualisation of hmmerscan results have done with com_vis.R script.
+
+## Results
+
+As a result of binning, 10 genomes were obtained from the metagenome
+Metagenomes found matches with catalase families responsible for cellulose/hemicellulose decomposition
+The collected metagenomes and the most represented groups in which the necessary catalases were found do not coincide.
+Differences in taxonomy are more pronounced than differences in the representation of glycoside hydrolase families
 
 
 

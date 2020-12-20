@@ -48,7 +48,8 @@ Binning was done using Metabat2 with followed command:
 
 Quality control was done out using CheckM:
 
-```checkm lineage_wf -x fa  -f checkm/N2_MAGs_checkm.tab -t 50 metabat2_bins_3/ out/
+```
+checkm lineage_wf -x fa  -f checkm/N2_MAGs_checkm.tab -t 50 metabat2_bins_3/ out/
 checkm qa ./out/lineage.ms ./out -o 2 -f res --tab_table -t 20
 ```
 
@@ -60,12 +61,14 @@ where ``out`` - out folder, ```metabat2_bins_3``` - folder with bins, ```-t``` -
 
 A preliminary attempt was made to binning using coverage information, which was unsuccessful. For alignment per assembly, we used two alignment algorithms:
 
-```bwa mem  -t 84 consensus.fasta all.fq | samtools sort -o all.bam
+```
+bwa mem  -t 84 consensus.fasta all.fq | samtools sort -o all.bam
 maCMD -p 'Nanopore' -x mc_out/consensus.json -i ../all.fq -t 64 -o mc_out/consensus.sam
 ```
 To generate a file with sequencing depth, the following command was used:
 
-```jgi_summarize_bam_contig_depths --outputDepth true_depth.txt --referenceFasta consensus.fasta  all.bam
+```
+jgi_summarize_bam_contig_depths --outputDepth true_depth.txt --referenceFasta consensus.fasta  all.bam
 ```
 with result:
 
